@@ -124,7 +124,7 @@ Template.modelSingle.onCreated(function(){
 	}
 });
 
-Template.modelSingle.helper({
+Template.modelSingle.helpers({
 	model : function(){
 		return Template.instance().model();
 	}
