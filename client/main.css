@@ -1,0 +1,54 @@
+body { padding-top: 70px; }
+.modelList .modelItem{
+    max-height: 300px !important;
+    height: 290px;
+}
+
+.modelItem .info, .info2, .info3{
+    margin: 5px 2px 5px;
+}
+
+.modelItem .info2{
+    color: #000066;
+    min-height: 38px;
+    max-height: 38px;
+    max-width: 249px;
+    overflow: hidden;
+}
+
+.modelItem .info3{
+    color: #660000;
+    font-weight: bolder;
+    font-size: smaller;
+}
+
+.modelItem hr{
+    margin-bottom: 6px !important;
+    margin-top: 0px !important;
+}
+
+.modelItem .username, .age{
+    font-weight: bold;
+}
+
+.modelList a{
+    text-decoration: none !important;
+}
+
+.girlShow .panel-body{
+    min-height: 550px !important;
+}
+
+.girlShow iframe, .embed-responsive {
+    min-height: 528px !important;
+}
+
+.girlShow .tags {
+    padding : 5px 0px 0px 5px;
+    margin: 0px;
+}
+
+.girlShow .tags li{
+    display: inline-block;
+    margin: 2px;
+}

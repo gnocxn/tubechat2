@@ -1,0 +1,62 @@
+<template name="defaultLayout">
+    {{> menu}}
+    <div class="container">
+        {{> Template.dynamic template=main}}
+    </div>
+</template>
+
+<template name="loading">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img src="/loading.gif" alt="Loading..." class="img-responsive center-block" width="50px" height="50px"/>
+        </div>
+    </div>
+</template>
+
+<template name="modelList">
+    <div class="modelList">
+        <div class="row">
+            {{#each models}}
+                {{> modelList_Item}}
+            {{/each}}
+        </div>
+        {{#if Template.subscriptionsReady}}
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary load-more">View more</button>
+            </div>
+        </div>
+        {{else}}
+        {{> loading}}
+        {{/if}}
+    </div>
+</template>
+
+<template name="modelList_Item">
+    <div class="col-lg-3 col-md-4 col-xs-6">
+        <a href="/{{model.gender}}/{{model.username}}" class="thumbnail modelItem">
+            <img src="{{model.image_url_360x270}}" alt="{{model.username}}" width="360px" height="270px"/>
+            <p class="info">
+                <span class="username text-primary">{{model.username}}</span>
+                <span class="age pull-right text-muted">{{model.age}}</span>
+            </p>
+            {{#if model.getRoomSubject}}
+            <p class="info2">
+                <span class="subject">{{model.getRoomSubject}}</span>
+            </p>
+            {{/if}}
+            {{#if model.getMinutes}}
+            <p class="info3">
+                <span>{{model.getMinutes}} mins</span>
+                <span class="pull-right">{{model.num_users}}</span>
+            </p>
+            {{/if}}
+        </a>
+    </div>
+</template>
+
+<template name="modelSingle">
+    <div class="row">
+
+    </div>
+</template>
