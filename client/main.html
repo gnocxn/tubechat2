@@ -20,12 +20,14 @@
                 {{> modelList_Item}}
             {{/each}}
         </div>
-        {{#if isReady}}
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <button class="btn btn-primary load-more">View more</button>
-            </div>
-        </div>
+        {{#if Template.subscriptionsReady}}
+            {{#if hasLoadMore}}
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-primary load-more">View more</button>
+                    </div>
+                </div>
+            {{/if}}
         {{else}}
         {{> loading}}
         {{/if}}
@@ -35,7 +37,7 @@
 <template name="modelList_Item">
     <div class="col-lg-3 col-md-4 col-xs-6">
         <a href="/{{model.gender}}/{{model.username}}" class="thumbnail modelItem">
-            <img src="{{model.image_url_360x270}}" alt="{{model.username}}" width="360px" height="270px"/>
+            <img src="/loading.gif" alt="{{model.username}}" width="360px" height="270px" class="img-model-{{model.username}}"/>
             <p class="info">
                 <span class="username text-primary">{{model.username}}</span>
                 <span class="age pull-right text-muted">{{model.age}}</span>
@@ -55,8 +57,16 @@
     </div>
 </template>
 
-<template name="modelList_Item_image">
-    
+<template name="models.featured">
+    {{> modelList}}
+</template>
+
+<template name="models.byGender">
+    {{> modelList}}
+</template>
+
+<template name="models.byTag">
+    {{> modelList}}
 </template>
 
 <template name="modelSingle">

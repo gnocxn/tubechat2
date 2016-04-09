@@ -1,12 +1,13 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-let ModelSubs = new SubsManager();
+//let ModelSubs = new SubsManager();
 
 Template.modelList.onCreated(function () {
 	let self = this;
+
 	self.loaded = new ReactiveVar(0);
-	self.limit = new ReactiveVar(100);
+	self.limit = new ReactiveVar(40);
 	self.filter = new ReactiveVar({
 		is_online: true,
 		current_show: {$ne: 'private'}
@@ -16,22 +17,14 @@ Template.modelList.onCreated(function () {
 
 	let options = {
 		sort: {
-			num_users: -1,
-			is_hd: 1,
-			is_new: 1
+			num_users: -1
 		}
 	}
 
 	self.autorun(function (c) {
-		self.filter.set({
-			is_online: true,
-			current_show: {$ne: 'private'}
-		});
-		//self.ready.set(false);
-		FlowRouter.watchPathChange();
-		let currentContext = FlowRouter.current();
-		let gender = (currentContext && currentContext.params.gender) ? currentContext.params.gender : null;
-		let tag = (currentContext && currentContext.params.tag) ? currentContext.params.tag : null;
+		let gender = FlowRouter.getParam('gender');
+		let tag = FlowRouter.getParam('tag');
+
 		let _filter = self.filter.get();
 
 		if (gender) {
@@ -45,9 +38,9 @@ Template.modelList.onCreated(function () {
 		let limit = self.limit.get();
 
 		options = _.extend(options, {limit: limit});
-		let subscription = ModelSubs.subscribe('models.list', _filter, options);
+		let subscription = self.subscribe('models.list', _filter, options);
 		if(subscription.ready()){
-			self.ready.set(true);
+			//self.ready.set(true);
 			self.loaded.set(limit);
 		}
 
@@ -88,9 +81,7 @@ Template.modelList.helpers({
 	models: function () {
 		return Template.instance().models();
 	},
-	isReady : function(){
-		return Template.instance().ready.get();
-	},
+
 	hasLoadMore: function () {
 		return Template.instance().models().count() >= Template.instance().limit.get();
 	}
@@ -100,7 +91,7 @@ Template.modelList.events({
 	'click .load-more': function (event, instance) {
 		event.preventDefault();
 		let limit = instance.limit.get();
-		limit += 5;
+		limit += 20;
 		instance.limit.set(limit);
 	}
 });
@@ -111,24 +102,34 @@ Template.modelList_Item.helpers({
 	}
 });
 
+Template.modelList_Item.onRendered(function(){
+	let model = Template.instance().data;
+	let selector = 'img.img-model-' + model.username;
+	let image_model = document.querySelector(selector);
+	let image = new Image();
 
+	image.onload = function(){
+		image_model.src = this.src;
+	}
+	image.src = model.image_url_360x270;
+})
 
-Template.modelSingle.onCreated(function(){
+/*Template.modelSingle.onCreated(function(){
 	let self = this;
 	let username = FlowRouter.getParam('username');
 
 	self.autorun(function(){
 		self.subscribe('models.single',username);
 	});
-
-	self.model = () => {
-		return Models.findOne({username : username});
-	}
-});
+});*/
 
 Template.modelSingle.helpers({
 	model : function(){
-		return Template.instance().model();
+		let model = Tracker.nonreactive(function(){
+			let username = FlowRouter.getParam('username');
+			return Models.findOne({username : username});
+		});
+		return model;
 	}
 })
 

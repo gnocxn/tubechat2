@@ -9,7 +9,7 @@ module.exports = {
 
     meteor: {
         name: 'tubechat2',
-        path: '/D/Projects/xxx/tubechat2',
+        path: '/home/nxcong/Projects/tubechat2',
         servers: {
             one: {
                 host: "13.92.131.114",

@@ -30,5 +30,5 @@ fortawesome:fontawesome
 percolate:synced-cron
 underscorestring:underscore.string
 dburles:collection-helpers
-meteorhacks:subs-manager
 meteorhacks:fast-render
+okgrow:analytics
