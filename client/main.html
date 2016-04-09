@@ -20,7 +20,7 @@
                 {{> modelList_Item}}
             {{/each}}
         </div>
-        {{#if Template.subscriptionsReady}}
+        {{#if isReady}}
         <div class="row">
             <div class="col-md-12 text-center">
                 <button class="btn btn-primary load-more">View more</button>
@@ -57,6 +57,28 @@
 
 <template name="modelSingle">
     <div class="row">
-
+        <div class="{{model.getWidthClassName}}">
+            <div class="panel panel-default girlShow">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{model.username}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{model.getEmbedUrl}}" style="border: none"></iframe>
+                    </div>
+                </div>
+                {{#if model.tags}}
+                <div class="panel-footer">
+                    <ul class="tags">
+                        {{#each model.tags}}
+                        <li>
+                            <a href="/tags/{{this}}" class="label label-success">{{this}}</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+            </div>
+        </div>
     </div>
 </template>
