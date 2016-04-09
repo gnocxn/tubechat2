@@ -111,6 +111,8 @@ Template.modelList_Item.helpers({
 	}
 });
 
+
+
 Template.modelSingle.onCreated(function(){
 	let self = this;
 	let username = FlowRouter.getParam('username');

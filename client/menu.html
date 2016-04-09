@@ -13,14 +13,14 @@
             </div>
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li class=""><a href="/">Featured</a></li>
-                    <li class=""><a href="/f">Female</a></li>
-                    <li class=""><a href="/m">Male</a></li>
-                    <li class=""><a href="/c">Couple</a></li>
+                    <li class="{{activeRoute 'models.list' null}}"><a href="/">Featured</a></li>
+                    <li class="{{activeRoute 'models.list.byGender' 'f'}}"><a href="/f">Female</a></li>
+                    <li class="{{activeRoute 'models.list.byGender' 'm'}}"><a href="/m">Male</a></li>
+                    <li class="{{activeRoute 'models.list.byGender' 'c'}}"><a href="/c">Couple</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#" target="_blank"><span class="glyphicon glyphicon-user"></span> Free SignUp</a>
+                        <a href="{{joinLink}}" target="_blank"><span class="glyphicon glyphicon-user"></span> Free SignUp</a>
                     </li>
                 </ul>
             </div>

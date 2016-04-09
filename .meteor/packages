@@ -20,7 +20,6 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 aldeed:collection2
 aldeed:simple-schema
 kadira:flow-router
-arillo:flow-router-helpers
 kadira:blaze-layout
 twbs:bootstrap
 check
